@@ -59,8 +59,8 @@
 - [x] Testes de CRUD para `Customer`
 - [x] Testes de CRUD para `Ticket`
 - [x] Implementação da Documentação Swagger
-- [ ] Implementação da ferramenta `RaffleDraw`
-- [ ] Configuração do serviço `RaffleDraw`
+- [x] Implementação do controlador `RaffleDraw`
+- [x] Implementação do serviço `RaffleDraw`
 - [ ] Configuração da validação de dados
 - [ ] Tratamento das excessões
 - [ ] Implementação de segurança com autenticação baseada em Token
@@ -184,6 +184,12 @@ classDiagram
         + update(Ticket ticket)
     }
 
+    class RaffleDrawService {
+        - RaffleRepository raffleRepository
+        - TicketRepository ticketRepository
+        + drawTicket(Raffle raffle)
+    }
+
     class CustomerController {
         - CustomerService customerService
         + add(Customer customer)
@@ -210,13 +216,21 @@ classDiagram
         + set(Ticket ticket)
     }
 
+    class RaffleDrawController {
+        - RaffleDrawService raffleDrawService
+        + drawTicket(Raffle raffle)
+    }
+
     CustomerController --> CustomerService
     RaffleController --> RaffleService
     TicketController --> TicketService
+    RaffleDrawController --> RaffleDrawService
 
     CustomerService --> CustomerRepository
     RaffleService --> RaffleRepository
     TicketService --> TicketRepository
+    RaffleDrawService --> RaffleRepository
+    RaffleDrawService --> TicketRepository
 
     CustomerRepository --> Customer
     RaffleRepository --> Raffle
@@ -227,5 +241,4 @@ classDiagram
     Raffle --> "1..*" Ticket
     Ticket --> "1" Raffle
     Ticket --> "1" Customer
-
 ```

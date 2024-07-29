@@ -24,15 +24,15 @@ public class TicketController {
     public ResponseEntity<Ticket> get(@PathVariable Long id) {
         return ResponseEntity.ok(ticketService.findById(id));
     }
-    @GetMapping("/raffle_{id}")
+    @GetMapping("/raffle-{id}")
     public ResponseEntity<List<Ticket>> getAllByRaffleId(@PathVariable Long id) {
         return ResponseEntity.ok(ticketService.findAllByRaffleId(id));
     }
-    @GetMapping("customer_{cpf}")
+    @GetMapping("customer-{cpf}")
     public ResponseEntity<List<Ticket>> getAllByCustomerCPf(@PathVariable String cpf) {
         return ResponseEntity.ok(ticketService.findAllByCustomerCpf(cpf));
     }
-    @GetMapping("raffle_{id}/customer_{cpf}")
+    @GetMapping("raffle_{id}/customer-{cpf}")
     public ResponseEntity<List<Ticket>> getAllByRaffleIdAndCustomerCPf(@PathVariable Long id, @PathVariable String cpf) {
         return ResponseEntity.ok(ticketService.findAllByRaffleIdAndCustomerCpf(id, cpf));
     }
