@@ -1,27 +1,31 @@
-package jmsmarcelo.raffleapi.model;
+package jmsmarcelo.raffleapi.raffle;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
-import java.util.List;
 
 @Entity(name = "raffles")
 public class Raffle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank
     @Column(nullable = false, unique = true)
     private String name;
     @Column(nullable = false)
+    @NotNull
     private Date drawDate;
     @Column(nullable = false)
+    @NotNull
     private Double price;
+    @NotBlank
     @Column(nullable = false)
     private String award;
+    @NotNull
     @Column(nullable = false)
     private RaffleStatus status = RaffleStatus.PENDING;
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<Ticket> tickets;
 
     public Long getId() {
         return id;
@@ -63,12 +67,5 @@ public class Raffle {
     }
     public void setStatus(RaffleStatus status) {
         this.status = status;
-    }
-
-    public List<Ticket> getTickets() {
-        return tickets;
-    }
-    public void setTickets(List<Ticket> tickets) {
-        this.tickets = tickets;
     }
 }

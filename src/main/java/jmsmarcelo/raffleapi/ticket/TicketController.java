@@ -1,7 +1,6 @@
-package jmsmarcelo.raffleapi.controller;
+package jmsmarcelo.raffleapi.ticket;
 
-import jmsmarcelo.raffleapi.model.Ticket;
-import jmsmarcelo.raffleapi.service.TicketService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +16,7 @@ public class TicketController {
     }
 
     @PostMapping
-    public ResponseEntity<Ticket> create(@RequestBody Ticket ticket) {
+    public ResponseEntity<Ticket> create(@RequestBody @Valid Ticket ticket) {
         return ResponseEntity.ok(ticketService.create(ticket));
     }
     @GetMapping("/{id}")
@@ -37,7 +36,7 @@ public class TicketController {
         return ResponseEntity.ok(ticketService.findAllByRaffleIdAndCustomerCpf(id, cpf));
     }
     @PutMapping
-    public ResponseEntity<Ticket> set(@RequestBody Ticket ticket) {
+    public ResponseEntity<Ticket> set(@RequestBody @Valid Ticket ticket) {
         return ResponseEntity.ok(ticketService.update(ticket));
     }
 }

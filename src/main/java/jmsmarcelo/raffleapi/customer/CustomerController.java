@@ -1,7 +1,6 @@
-package jmsmarcelo.raffleapi.controller;
+package jmsmarcelo.raffleapi.customer;
 
-import jmsmarcelo.raffleapi.model.Customer;
-import jmsmarcelo.raffleapi.service.CustomerService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +16,7 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<Customer> add(@RequestBody Customer customer) {
+    public ResponseEntity<Customer> add(@RequestBody @Valid Customer customer) {
         return ResponseEntity.ok(customerService.create(customer));
     }
     @GetMapping
@@ -25,11 +24,11 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.findAll());
     }
     @GetMapping("/{cpf}")
-    public ResponseEntity<Customer> getById(@PathVariable String cpf) {
+    public ResponseEntity<Customer> getById(@PathVariable @Valid String cpf) {
         return ResponseEntity.ok(customerService.findById(cpf));
     }
     @PutMapping
-    public ResponseEntity<Customer> set(@RequestBody Customer customer) {
+    public ResponseEntity<Customer> set(@RequestBody @Valid Customer customer) {
         return ResponseEntity.ok(customerService.update(customer));
     }
 }

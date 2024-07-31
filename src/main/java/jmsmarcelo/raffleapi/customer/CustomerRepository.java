@@ -1,7 +1,6 @@
-package jmsmarcelo.raffleapi.repository;
+package jmsmarcelo.raffleapi.customer;
 
 
-import jmsmarcelo.raffleapi.model.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

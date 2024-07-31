@@ -23,7 +23,7 @@
   - **Name** *(Nome da Rifa, não é permitido nomes repetidos)*
   - **Date** *(Data e hora do sorteio)*
   - **Price** *(Valor da rifa)*
-  - **Status** *(Pendente, Cancelado, A Realizar e Realizado)*
+  - **Status** *(Pendente, Cancelado, Disponível e Realizado)*
   - **Award** *(Prêmios a ser Ganhado)*
   - **Tickets** *(Contendo a lista de Bilhetes adqueridos)*
 
@@ -32,8 +32,8 @@
   - **CPF** *(Será a ID no banco de dados, portanto é obrigatório)*
   - **Name** *(Nome do cliente, é obrigatório)*
   - **Phone** *(Telefone, é obrigatório)*
-  - **alternativePhone** *(Telefone alternativo, é pcional)*
-  - **Email** *(Opcional)*
+  - **alternativePhone** *(Telefone alternativo, é opcional)*
+  - **Email** *(é Opcional)*
 
 - ### Ticket:
   - Armazena e obtém os dados do bilhete no Banco de Dados
@@ -61,14 +61,13 @@
 - [x] Implementação da Documentação Swagger
 - [x] Implementação do controlador `RaffleDraw`
 - [x] Implementação do serviço `RaffleDraw`
-- [ ] Configuração da validação de dados
-- [ ] Tratamento das excessões
+- [x] Configuração da validação de dados
+- [x] Tratamento das excessões
 - [ ] Implementação de segurança com autenticação baseada em Token
 - [ ] ~~Adição de testes unitários~~
 - [ ] ~~Configuração do CI/CD~~
 
 ## Diagrama UML:
-
 ```mermaid
 classDiagram
     class Customer {
@@ -88,6 +87,23 @@ classDiagram
         + getEmail()
         + setEmail(String email)
     }
+    class CustomerController {
+        - CustomerService customerService
+        + add(Customer customer)
+        + getAll()
+        + getById(String cpf)
+        + set(Customer customer)
+    }
+    class CustomerRepository {
+        <<interface>>
+    }
+    class CustomerService {
+        - CustomerRepository customerRepository
+        + create(Customer customer)
+        + findAll()
+        + findById(String cpf)
+        + update(Customer customer)
+    }
 
     class Raffle {
         - Long id
@@ -96,7 +112,6 @@ classDiagram
         - Double price
         - String award
         - RaffleStatus status
-        - List~Ticket~ tickets
         + getId()
         + setId(Long id)
         + getName()
@@ -111,6 +126,30 @@ classDiagram
         + setStatus(RaffleStatus status)
         + getTickets()
         + setTickets(List~Ticket~ tickets)
+    }
+    class RaffleController {
+        - RaffleService raffleService
+        + add(Raffle raffle)
+        + getAll()
+        + getById(Long id)
+        + set(Raffle raffle)
+    }
+    class RaffleRepository {
+        <<interface>>
+    }
+    class RaffleService {
+        - RaffleRepository raffleRepository
+        + create(Raffle raffle)
+        + findAll()
+        + findById(Long id)
+        + update(Raffle raffle)
+    }
+    class RaffleStatus {
+        <<enumeration>>
+        PENDING
+        CANCELLED
+        UPCOMING
+        COMPLETED
     }
 
     class Ticket {
@@ -127,85 +166,6 @@ classDiagram
         + getStatus()
         + setStatus(TicketStatus status)
     }
-
-    class RaffleStatus {
-        <<enumeration>>
-        PENDING
-        CANCELLED
-        UPCOMING
-        COMPLETED
-    }
-
-    class TicketStatus {
-        <<enumeration>>
-        PARTICIPATING
-        CANCELLED
-        WINNER
-    }
-
-    class CustomerRepository {
-        <<interface>>
-    }
-
-    class RaffleRepository {
-        <<interface>>
-    }
-
-    class TicketRepository {
-        <<interface>>
-        + List~Ticket~ findAllByRaffleId(Long raffleId)
-        + List~Ticket~ findAllByCustomerCpf(String customerCpf)
-        + List~Ticket~ findAllByRaffleIdAndCustomerCpf(Long raffleId, String customerCpf)
-    }
-
-    class CustomerService {
-        - CustomerRepository customerRepository
-        + create(Customer customer)
-        + findAll()
-        + findById(String cpf)
-        + update(Customer customer)
-    }
-
-    class RaffleService {
-        - RaffleRepository raffleRepository
-        + create(Raffle raffle)
-        + findAll()
-        + findById(Long id)
-        + update(Raffle raffle)
-    }
-
-    class TicketService {
-        - TicketRepository ticketRepository
-        + create(Ticket ticket)
-        + findById(Long id)
-        + findAllByRaffleId(Long raffleId)
-        + findAllByCustomerCpf(String customerCpf)
-        + findAllByRaffleIdAndCustomerCpf(Long raffleId, String customerCpf)
-        + update(Ticket ticket)
-    }
-
-    class RaffleDrawService {
-        - RaffleRepository raffleRepository
-        - TicketRepository ticketRepository
-        + drawTicket(Raffle raffle)
-    }
-
-    class CustomerController {
-        - CustomerService customerService
-        + add(Customer customer)
-        + getAll()
-        + getById(String cpf)
-        + set(Customer customer)
-    }
-
-    class RaffleController {
-        - RaffleService raffleService
-        + add(Raffle raffle)
-        + getAll()
-        + getById(Long id)
-        + set(Raffle raffle)
-    }
-
     class TicketController {
         - TicketService ticketService
         + create(Ticket ticket)
@@ -215,30 +175,74 @@ classDiagram
         + getAllByRaffleIdAndCustomerCPf(Long id, String cpf)
         + set(Ticket ticket)
     }
+    class TicketRepository {
+        <<interface>>
+        + List~Ticket~ findAllByRaffleId(Long raffleId)
+        + List~Ticket~ findAllByCustomerCpf(String customerCpf)
+        + List~Ticket~ findAllByRaffleIdAndCustomerCpf(Long raffleId, String customerCpf)
+    }
+    class TicketService {
+        - TicketRepository ticketRepository
+        + create(Ticket ticket)
+        + findById(Long id)
+        + findAllByRaffleId(Long raffleId)
+        + findAllByCustomerCpf(String customerCpf)
+        + findAllByRaffleIdAndCustomerCpf(Long raffleId, String customerCpf)
+        + update(Ticket ticket)
+    }
+    class TicketStatus {
+        <<enumeration>>
+        PARTICIPATING
+        CANCELLED
+        WINNER
+    }
 
     class RaffleDrawController {
         - RaffleDrawService raffleDrawService
         + drawTicket(Raffle raffle)
     }
+    class RaffleDrawService {
+        - RaffleRepository raffleRepository
+        - TicketRepository ticketRepository
+        + drawTicket(Raffle raffle)
+    }
+    
+    class GlobalExceptionHandler {
+        + handle(Exception e)
+    }
+    class ValidationException {
+        - ExceptionDetails
+        + ValidationException()
+        + getExceptionDetails()
+    }
+    class ExceptionDetails {
+    }
 
     CustomerController --> CustomerService
-    RaffleController --> RaffleService
-    TicketController --> TicketService
-    RaffleDrawController --> RaffleDrawService
-
     CustomerService --> CustomerRepository
+    CustomerRepository --> Customer
+    CustomerService --> ValidationException
+
+    RaffleController --> RaffleService
     RaffleService --> RaffleRepository
+    RaffleRepository --> Raffle
+    Raffle --> "1" RaffleStatus
+    RaffleService --> ValidationException
+
+    TicketController --> TicketService
     TicketService --> TicketRepository
+    TicketRepository --> Ticket
+    Ticket --> "1" TicketStatus
+    Ticket "0..*" --> "1" Raffle
+    Ticket "0..*" --> "1" Customer
+    TicketService --> ValidationException
+
+    RaffleDrawController --> RaffleDrawService
     RaffleDrawService --> RaffleRepository
     RaffleDrawService --> TicketRepository
-
-    CustomerRepository --> Customer
-    RaffleRepository --> Raffle
-    TicketRepository --> Ticket
-
-    Raffle --> "1" RaffleStatus
-    Ticket --> "1" TicketStatus
-    Raffle --> "1..*" Ticket
-    Ticket --> "1" Raffle
-    Ticket --> "1" Customer
+    RaffleDrawService --> ValidationException
+    
+    GlobalExceptionHandler --> ValidationException
+    GlobalExceptionHandler --> ExceptionDetails
+    ValidationException --> ExceptionDetails
 ```

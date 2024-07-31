@@ -1,15 +1,17 @@
-package jmsmarcelo.raffleapi.model;
+package jmsmarcelo.raffleapi.ticket;
 
 import jakarta.persistence.*;
+import jmsmarcelo.raffleapi.customer.Customer;
+import jmsmarcelo.raffleapi.raffle.Raffle;
 
 @Entity(name = "tickets")
 public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     private Raffle raffle;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     private Customer customer;
     @Column(nullable = false)
     private TicketStatus status = TicketStatus.PARTICIPATING;

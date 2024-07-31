@@ -1,8 +1,6 @@
-package jmsmarcelo.raffleapi.repository;
+package jmsmarcelo.raffleapi.ticket;
 
-import jmsmarcelo.raffleapi.model.RaffleStatus;
-import jmsmarcelo.raffleapi.model.Ticket;
-import jmsmarcelo.raffleapi.model.TicketStatus;
+import jmsmarcelo.raffleapi.raffle.RaffleStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,7 +1,6 @@
-package jmsmarcelo.raffleapi.controller;
+package jmsmarcelo.raffleapi.raffle;
 
-import jmsmarcelo.raffleapi.model.Raffle;
-import jmsmarcelo.raffleapi.service.RaffleService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +16,7 @@ public class RaffleController {
     }
 
     @PostMapping
-    public ResponseEntity<Raffle> add(@RequestBody Raffle raffle) {
+    public ResponseEntity<Raffle> add(@RequestBody @Valid Raffle raffle) {
         return ResponseEntity.ok(raffleService.create(raffle));
     }
     @GetMapping
@@ -25,11 +24,11 @@ public class RaffleController {
         return ResponseEntity.ok(raffleService.findAll());
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Raffle> getById(@PathVariable Long id) {
+    public ResponseEntity<Raffle> getById(@PathVariable @Valid Long id) {
         return ResponseEntity.ok(raffleService.findById(id));
     }
     @PutMapping
-    public ResponseEntity<Raffle> set(@RequestBody Raffle raffle) {
+    public ResponseEntity<Raffle> set(@RequestBody @Valid Raffle raffle) {
         return ResponseEntity.ok(raffleService.update(raffle));
     }
 }
