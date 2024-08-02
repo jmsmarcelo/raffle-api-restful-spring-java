@@ -1,11 +1,6 @@
 package jmsmarcelo.raffleapi;
 
-import jmsmarcelo.raffleapi.security.SecurityConfiguration;
-import jmsmarcelo.raffleapi.security.UserForTest;
-import jmsmarcelo.raffleapi.security.user.Role;
-import jmsmarcelo.raffleapi.security.user.User;
-import jmsmarcelo.raffleapi.security.user.UserRepository;
-import jmsmarcelo.raffleapi.security.user.UserService;
+import jmsmarcelo.raffleapi.infra.security.UserForTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,9 +1,9 @@
-package jmsmarcelo.raffleapi.security;
+package jmsmarcelo.raffleapi.infra.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import jmsmarcelo.raffleapi.exception.ValidationException;
-import jmsmarcelo.raffleapi.security.user.User;
+import jmsmarcelo.raffleapi.infra.exception.ValidationException;
+import jmsmarcelo.raffleapi.infra.security.user.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

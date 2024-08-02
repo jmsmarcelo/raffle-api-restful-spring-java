@@ -1,6 +1,6 @@
 package jmsmarcelo.raffleapi.raffle;
 
-import jmsmarcelo.raffleapi.exception.ValidationException;
+import jmsmarcelo.raffleapi.infra.exception.ValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 

@@ -1,12 +1,12 @@
-package jmsmarcelo.raffleapi.security;
+package jmsmarcelo.raffleapi.infra.security;
 
-import jmsmarcelo.raffleapi.security.user.Role;
-import jmsmarcelo.raffleapi.security.user.User;
-import jmsmarcelo.raffleapi.security.user.UserRepository;
+import jmsmarcelo.raffleapi.infra.security.user.Role;
+import jmsmarcelo.raffleapi.infra.security.user.User;
+import jmsmarcelo.raffleapi.infra.security.user.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class UserForTest {
     UserRepository userRepository;
     public UserForTest(UserRepository userRepository) {

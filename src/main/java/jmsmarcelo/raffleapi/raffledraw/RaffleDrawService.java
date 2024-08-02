@@ -1,6 +1,6 @@
 package jmsmarcelo.raffleapi.raffledraw;
 
-import jmsmarcelo.raffleapi.exception.ValidationException;
+import jmsmarcelo.raffleapi.infra.exception.ValidationException;
 import jmsmarcelo.raffleapi.raffle.RaffleRepository;
 import jmsmarcelo.raffleapi.raffle.RaffleStatus;
 import jmsmarcelo.raffleapi.ticket.Ticket;

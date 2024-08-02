@@ -1,10 +1,10 @@
-package jmsmarcelo.raffleapi.security;
+package jmsmarcelo.raffleapi.infra.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jmsmarcelo.raffleapi.security.user.UserRepository;
+import jmsmarcelo.raffleapi.infra.security.user.UserRepository;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;

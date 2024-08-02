@@ -6,16 +6,17 @@
 ### Desafio DIO Bootcamp
 
 - **Desafio:** Desenvolver uma API RESTful com Spring Framework e Java
-- **Projeto:** A livre escolha
+- **Tema:** A livre escolha
 - **Bootcamp:** [Coding The Future GFT - Desenvolvimento Java com IA](https://www.dio.me/bootcamp/coding-future-gft-desenvolvimento-java-com-ia)
 
 ## Tecnologias utilizadas:
-- Java 21 LTS
-- Spring Boot 3.3.2
-- Gradle - Groovy
-- JPA
-- H2 Database
-- OpenAPI Swagger
+- ![Java 21 LTS](https://img.shields.io/badge/Java-21%20LTS-blue)
+- ![Spring Boot 3.3.2](https://img.shields.io/badge/Spring%20Boot-3.3.2-brightgreen)
+- ![Gradle - Groovy](https://img.shields.io/badge/Gradle-Groovy-brightgreen)
+- ![Spring JPA](https://img.shields.io/badge/Spring%20JPA-%23323330.svg?style=flat&logo=spring)
+- ![H2 Database](https://img.shields.io/badge/H2%20Database-%23007396.svg?style=flat&logo=h2)
+- ![OpenAPI Swagger](https://img.shields.io/badge/OpenAPI-Swagger-brightgreen)
+- ![Spring Security](https://img.shields.io/badge/Spring%20Security-gray.svg?style=flat&logo=spring%20security)
 
 ## Detalhes do Projeto:
     API que armazena rifas, clientes, bilhetes e realiza o sorteio.

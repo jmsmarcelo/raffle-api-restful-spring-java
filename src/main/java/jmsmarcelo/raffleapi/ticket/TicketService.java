@@ -1,7 +1,7 @@
 package jmsmarcelo.raffleapi.ticket;
 
 import jmsmarcelo.raffleapi.customer.CustomerRepository;
-import jmsmarcelo.raffleapi.exception.ValidationException;
+import jmsmarcelo.raffleapi.infra.exception.ValidationException;
 import jmsmarcelo.raffleapi.raffle.RaffleRepository;
 import jmsmarcelo.raffleapi.raffle.RaffleStatus;
 import org.springframework.http.HttpStatus;

@@ -1,7 +1,7 @@
-package jmsmarcelo.raffleapi.security.user;
+package jmsmarcelo.raffleapi.infra.security.user;
 
 import jakarta.validation.Valid;
-import jmsmarcelo.raffleapi.security.TokenData;
+import jmsmarcelo.raffleapi.infra.security.TokenData;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping
 public class UserController {
-    private final UserSecurity userSecurity;
+    private final UserService userService;
 
-    public UserController(UserSecurity userSecurity) {
-        this.userSecurity = userSecurity;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @PostMapping("/login")
     public ResponseEntity<TokenData> login(@RequestBody @Valid UserData userData) {
-        return ResponseEntity.ok(userSecurity.getTokenData(userData));
+        return ResponseEntity.ok(userService.getTokenData(userData));
     }
 }

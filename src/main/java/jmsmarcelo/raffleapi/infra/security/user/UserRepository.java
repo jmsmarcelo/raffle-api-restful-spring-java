@@ -1,4 +1,4 @@
-package jmsmarcelo.raffleapi.security.user;
+package jmsmarcelo.raffleapi.infra.security.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.userdetails.UserDetails;

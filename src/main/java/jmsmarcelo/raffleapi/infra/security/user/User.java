@@ -1,4 +1,4 @@
-package jmsmarcelo.raffleapi.security.user;
+package jmsmarcelo.raffleapi.infra.security.user;
 
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;

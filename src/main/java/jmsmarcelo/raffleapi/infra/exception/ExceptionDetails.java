@@ -1,4 +1,4 @@
-package jmsmarcelo.raffleapi.exception;
+package jmsmarcelo.raffleapi.infra.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;

@@ -1,4 +1,4 @@
-package jmsmarcelo.raffleapi.security;
+package jmsmarcelo.raffleapi.infra.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
