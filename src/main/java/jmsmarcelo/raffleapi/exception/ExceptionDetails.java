@@ -2,6 +2,7 @@ package jmsmarcelo.raffleapi.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.time.LocalDateTime;
@@ -9,12 +10,13 @@ import java.util.LinkedHashMap;
 
 public class ExceptionDetails extends LinkedHashMap<Object, String> {
 
-    public ExceptionDetails(MethodArgumentNotValidException e, HttpStatus status) {
+    public ExceptionDetails(HttpStatus status, MethodArgumentNotValidException e) {
         set("status::" + status.toString(),
                 "field::" + e.getFieldError().getField(),
                 "error::" + e.getFieldError().getDefaultMessage());
     }
-    public ExceptionDetails(String ... keyName) {
+    public ExceptionDetails(HttpStatus status, String ... keyName) {
+        set("status::" + status);
         set(keyName);
     }
     public ExceptionDetails(HttpMessageNotReadableException e) {
@@ -26,6 +28,12 @@ public class ExceptionDetails extends LinkedHashMap<Object, String> {
         }
         set("status::" + HttpStatus.BAD_REQUEST, location, error);
     }
+    public ExceptionDetails(HttpStatus httpStatus, BadCredentialsException e) {
+        set("status::" + httpStatus,
+                "field::password",
+                "error::" + e.getMessage());
+    }
+
     private void set(String ... keyName) {
         super.put("timestamp", LocalDateTime.now().toString());
         for (String kn : keyName) {

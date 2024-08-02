@@ -24,16 +24,16 @@ public class TicketService {
     public Ticket create(Ticket ticket) {
         if(ticket.getRaffle().getId() == null)
             throw new ValidationException(
-                    "status::" + HttpStatus.BAD_REQUEST, "field::raffle", "error::The given id must not be null");
+                    HttpStatus.BAD_REQUEST, "field::raffle", "error::The given id must not be null");
         if(!raffleRepository.existsByIdAndStatus(ticket.getRaffle().getId(), RaffleStatus.AVAILABLE))
             throw new ValidationException(
-                    "status::" + HttpStatus.NOT_FOUND, "field::raffle id", "error::does not exist or the status is not AVAILABLE");
+                    HttpStatus.NOT_FOUND, "field::raffle id", "error::does not exist or the status is not AVAILABLE");
         if(ticket.getCustomer().getCpf() == null || ticket.getCustomer().getCpf().isEmpty())
             throw new ValidationException(
-                    "status::" + HttpStatus.BAD_REQUEST, "field::customer", "error::The given cpf must not be null or empty");
+                    HttpStatus.BAD_REQUEST, "field::customer", "error::The given cpf must not be null or empty");
         if(!customerRepository.existsById(ticket.getCustomer().getCpf()))
             throw new ValidationException(
-                    "status::" + HttpStatus.NOT_FOUND, "field::customer", "error::cpf does not exist");
+                    HttpStatus.NOT_FOUND, "field::customer", "error::cpf does not exist");
 
         ticket.setRaffle(raffleRepository.findById(ticket.getRaffle().getId()).orElse(ticket.getRaffle()));
         ticket.setCustomer(customerRepository.findById(ticket.getCustomer().getCpf()).orElse(ticket.getCustomer()));
@@ -42,7 +42,7 @@ public class TicketService {
     public Ticket findById(Long id) {
         if(!ticketRepository.existsById(id))
             throw new ValidationException(
-                    "status::" + HttpStatus.NOT_FOUND, "path::", "error::ticket does not exist");
+                    HttpStatus.NOT_FOUND, "path::", "error::ticket does not exist");
 
         return ticketRepository.findById(id).orElse(null);
     }
@@ -51,7 +51,7 @@ public class TicketService {
 
         if(tickets.isEmpty())
             throw new ValidationException(
-                    "status::" + HttpStatus.NOT_FOUND, "error::there are no tickets for the selected raffle");
+                    HttpStatus.NOT_FOUND, "error::there are no tickets for the selected raffle");
 
         return tickets;
     }
@@ -60,7 +60,7 @@ public class TicketService {
 
         if(tickets.isEmpty())
             throw new ValidationException(
-                    "status::" + HttpStatus.NOT_FOUND, "error::There are no tickets for the selected cpf");
+                    HttpStatus.NOT_FOUND, "error::There are no tickets for the selected cpf");
 
         return tickets;
     }
@@ -69,14 +69,14 @@ public class TicketService {
 
         if(tickets.isEmpty())
             throw new ValidationException(
-                    "status::" + HttpStatus.NOT_FOUND, "error::There are no tickets for the selected id/cpf");
+                    HttpStatus.NOT_FOUND, "error::There are no tickets for the selected id/cpf");
 
         return tickets;
     }
     public Ticket update(Ticket ticket) {
         if(!ticketRepository.existsById(ticket.getId()))
             throw new ValidationException(
-                    "status::" + HttpStatus.NOT_FOUND, "path::", "error::ticket does not exist");
+                    HttpStatus.NOT_FOUND, "path::", "error::ticket does not exist");
 
         return ticketRepository.save(ticket);
     }

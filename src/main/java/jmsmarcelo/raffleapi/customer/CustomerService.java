@@ -18,7 +18,7 @@ public class CustomerService {
     public Customer create(Customer customer) {
         if(customerRepository.existsById(customer.getCpf()))
             throw new ValidationException(
-                    "status::" + HttpStatus.CONFLICT, "field::cpf", "error::Customer already registered");
+                    HttpStatus.CONFLICT, "field::cpf", "error::Customer already registered");
 
         return customerRepository.save(customer);
     }
@@ -27,23 +27,21 @@ public class CustomerService {
 
         if(customers.isEmpty())
             throw new ValidationException(
-                    "status::" + HttpStatus.NOT_FOUND, "path::/customers", "error::there are no customers");
+                    HttpStatus.NOT_FOUND, "path::/customers", "error::there are no customers");
 
         return customers;
     }
     public Customer findById(String cpf) {
         if(!customerRepository.existsById(cpf))
             throw new ValidationException(
-                    "status::" + HttpStatus.NOT_FOUND, "path::/customers/" + cpf, "error::Customer not found"
-            );
+                    HttpStatus.NOT_FOUND, "path::/customers/" + cpf, "error::Customer not found");
 
         return customerRepository.findById(cpf).orElse(null);
     }
     public Customer update(Customer customer) {
         if(!customerRepository.existsById(customer.getCpf()))
             throw new ValidationException(
-                    "status::" + HttpStatus.NOT_FOUND, "field::cpf", "error::Customer not found"
-            );
+                    HttpStatus.NOT_FOUND, "field::cpf", "error::Customer not found");
 
         return customerRepository.save(customer);
     }

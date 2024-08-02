@@ -17,7 +17,7 @@ public class RaffleService {
     public Raffle create(Raffle raffle) {
         if(raffleRepository.existsByName(raffle.getName()))
             throw new ValidationException(
-                    "status::" + HttpStatus.CONFLICT, "field::name", "error::there is a raffle with this name");
+                    HttpStatus.CONFLICT, "field::name", "error::there is a raffle with this name");
 
         return raffleRepository.save(raffle);
     }
@@ -26,27 +26,27 @@ public class RaffleService {
 
         if(raffles.isEmpty())
             throw new ValidationException(
-                    "status::" + HttpStatus.NOT_FOUND, "field::raffle", "error::there is no raffles");
+                    HttpStatus.NOT_FOUND, "field::raffle", "error::there is no raffles");
 
         return raffles;
     }
     public Raffle findById(Long id) {
         if(!raffleRepository.existsById(id))
             throw new ValidationException(
-                    "status::" + HttpStatus.NOT_FOUND, "path::/raffles/" +id, "error::there is no raffle with this id");
+                    HttpStatus.NOT_FOUND, "path::/raffles/" +id, "error::there is no raffle with this id");
 
         return raffleRepository.findById(id).orElse(new Raffle());
     }
     public Raffle update(Raffle raffle) {
         if(raffle.getId() == null)
             throw new ValidationException(
-                    "status::" + HttpStatus.BAD_REQUEST, "field::id", "error::");
+                    HttpStatus.BAD_REQUEST, "field::id", "error::");
         if(raffleRepository.existsByNameAndIdNot(raffle.getName(), raffle.getId()))
                 throw new ValidationException(
-                    "status::" + HttpStatus.CONFLICT, "field::name", "error::there is a raffle with this name");
+                    HttpStatus.CONFLICT, "field::name", "error::there is a raffle with this name");
         if(!raffleRepository.existsById(raffle.getId()))
             throw new ValidationException(
-                    "status::" + HttpStatus.NOT_FOUND, "field::id", "error::this raffle does not exist");
+                    HttpStatus.NOT_FOUND, "field::id", "error::this raffle does not exist");
 
         return raffleRepository.save(raffle);
     }

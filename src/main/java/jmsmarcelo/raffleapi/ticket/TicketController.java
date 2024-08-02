@@ -1,5 +1,6 @@
 package jmsmarcelo.raffleapi.ticket;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/tickets")
+@SecurityRequirement(name = "bearer-key")
 public class TicketController {
     private final TicketService ticketService;
 

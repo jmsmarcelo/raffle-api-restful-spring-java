@@ -1,10 +1,13 @@
 # Raffle API RESTful
-![Status do Projeto](https://img.shields.io/badge/status-em%20produção-brightgreen)
+![Status do Projeto](https://img.shields.io/badge/status-concluído-brightgreen)
+
+<img align="right" width="200" src="./dio-desenvolvimento.java.com.ia.png">
 
 ### Desafio DIO Bootcamp
+
 - **Desafio:** Desenvolver uma API RESTful com Spring Framework e Java
-- **Tema:** A livre escolha
-- **Bootcamp:** Desenvolvimento Java com IA
+- **Projeto:** A livre escolha
+- **Bootcamp:** [Coding The Future GFT - Desenvolvimento Java com IA](https://www.dio.me/bootcamp/coding-future-gft-desenvolvimento-java-com-ia)
 
 ## Tecnologias utilizadas:
 - Java 21 LTS
@@ -47,6 +50,12 @@
   - Atualiza o Status da Rifa para Realizado
   - Atualiza o Status do Bilhete para Ganhador
 
+- ### Spring Security:
+  - As senhas dos usuários são criptografadas com **BCrypt** e armazenadas no banco de dados
+  - Adicionei duas hierarquias: **ADMIN** que tem acesso total e o **USER** que somente ver as Rifas.
+  - Permissão de acesso via Token, que é gerado via login
+  - Não adicionei cadastro, terá que ser feito manualmente no banco de dados
+
 ## Progresso do Projeto:
 - [x] Implementação do modelo `Customer`
 - [x] Implementação do modelo `Raffle`
@@ -63,9 +72,18 @@
 - [x] Implementação do serviço `RaffleDraw`
 - [x] Configuração da validação de dados
 - [x] Tratamento das excessões
-- [ ] Implementação de segurança com autenticação baseada em Token
+- [x] Implementação de segurança com autenticação baseada em Token
 - [ ] ~~Adição de testes unitários~~
 - [ ] ~~Configuração do CI/CD~~
+
+## Como usar:
+- **Swagger-UI:**
+  - `http://localhost:8080/swagger-ui.html`
+- **Console do Banco de Dados:**
+  - `http://localhost:8080/h2-console/`
+- **Usuário/Administrador:**
+  - Como o Banco de Dados somente está em memória adicionei a Class `UserForTest` para criar automaticamente um ADMIN (user: `adminTest`, pass: `12345678`) e um USER (user: `userTest`, pass: `12345678`) para testes de hierarquia
+  - 
 
 ## Diagrama UML:
 ```mermaid
