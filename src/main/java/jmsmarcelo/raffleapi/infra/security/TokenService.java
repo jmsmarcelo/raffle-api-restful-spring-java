@@ -4,8 +4,12 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import jmsmarcelo.raffleapi.infra.exception.ValidationException;
 import jmsmarcelo.raffleapi.infra.security.user.User;
+import jmsmarcelo.raffleapi.infra.security.user.UserData;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -36,6 +40,7 @@ public class TokenService {
             throw new ValidationException(HttpStatus.BAD_REQUEST, "error:invalid or expired token", "message::" + e.getMessage());
         }
     }
+
     private Instant expirationDate() {
         return Instant.now().plusSeconds(3600 * 24 * 30);
     }
